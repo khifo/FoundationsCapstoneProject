@@ -1,0 +1,74 @@
+<link rel="stylesheet" href="styles.css">
+<head><script src="https://code.jquery.com/jquery-1.10.2.js"></script></head>
+<body><div id="nav-placeholder">
+
+</div>
+
+<script>
+$(function(){
+  $("#nav-placeholder").load("nav.html");
+});
+</script></body>
+<div class="our-teams">
+    <h1>Our Teams</h1>
+    <div class="team">
+      <h2>U10 Team</h2>
+      <img class="resize" src="https://usafootball.com/assets/images/return-to-play/player-rtp.jpeg" alt="U10 Team">
+      <p>The U10 team is made up of players aged 8-10 years old.</p>
+      <button class="team-roster-btn">View Roster</button>
+    </div>
+    <div class="team">
+      <h2>U12 Team</h2>
+      <img class="resize" src="https://static01.nyt.com/images/2017/02/01/sports/01TACKLE1/01TACKLE1-superJumbo.jpg" alt="U12 Team">
+      <p>The U12 team is made up of players aged 10-12 years old.</p>
+      <button class="team-roster-btn">View Roster</button>
+    </div>
+    <div class="team">
+      <h2>U14 Team</h2>
+      <img class="resize" src="https://www.verywellfamily.com/thmb/lKYAZNhBbSfp5dI_GjW9r41At3I=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/making-the-handoff-172278018-589a49235f9b5874eec80126.jpg" alt="U14 Team">
+      <p>The U14 team is made up of players aged 12-14 years old.</p>
+      <button class="team-roster-btn">View Roster</button>
+    </div>
+  </div>
+  
+  <div class="model" id="team-roster-model">
+    <div class="model-content">
+      <h2>Team Roster</h2>
+      <ul id="roster-list"></ul>
+    </div>
+  </div>
+  
+  
+
+<div class="player-profile">
+    <h1>Player Profile</h1>
+    <div class="player-info">
+      <img class="resize" id="player-img" src="https://d3jj1xescvzl2o.cloudfront.net/01-09-2018/t_1515512495028_name_ct_addison_youth_football_decline_video_20170904_scaled.jpg" alt="Player Image">
+      <div class="player-details">
+        <h2 id="player-name">Player Name</h2>
+        <p><strong>Position:</strong> <span id="player-position">Position</span></p>
+        <p><strong>Jersey Number:</strong> <span id="player-jersey">Jersey Number</span></p>
+        <p><strong>Age:</strong> <span id="player-age">Age</span></p>
+      </div>
+    </div>
+  </div>
+  
+  <div class="model" id="edit-player-model">
+    <div class="model-content">
+      <h2>Edit Player Profile</h2>
+      <form id="edit-player-form">
+        <label for="player-img">Player Image:</label>
+        <input type="file" id="player-img" accept="image/*">
+        <label for="player-name">Name:</label>
+        <input type="text" id="player-name" required>
+        <label for="player-position">Position:</label>
+        <input type="text" id="player-position" required>
+        <label for="player-jersey">Jersey Number:</label>
+        <input type="number" id="player-jersey" required>
+        <label for="player-age">Age:</label>
+        <input type="number" id="player-age" required>
+        <button type="submit">Save</button>
+      </form>
+    </div>
+  </div>
+  

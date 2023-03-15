@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+	<title>Contact Us - Youth Football Program</title>
+</head>
+<style>
+    body {
+	font-family: Arial, sans-serif;
+	margin: 0;
+	padding: 0;
+}
+header {
+	background-color: #333;
+	color: #fff;
+	padding: 20px;
+	text-align: center;
+}
+h1 {
+	margin: 0;
+	font-size: 36px;
+	font-weight: bold;
+	text-transform: uppercase;
+}
+.container {
+	max-width: 960px;
+	margin: 0 auto;
+	padding: 20px;
+}
+form {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 20px;
+}
+label {
+	display: block;
+	font-weight: bold;
+	margin-bottom: 5px;
+}
+input[type="text"],
+input[type="email"],
+textarea {
+	width: 100%;
+	padding: 10px;
+	margin-bottom: 10px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	box-sizing: border-box;
+	font-size: 16px;
+	resize: vertical;
+}
+input[type="submit"] {
+	background-color: #4CAF50;
+	color: #fff;
+	padding: 10px 20px;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+	font-size: 16px;
+	text-transform: uppercase;
+}
+input[type="submit"]:hover {
+	background-color: #45a049;
+}
+.alert {
+	background-color: #f44336;
+	color: #fff;
+	padding: 10px;
+	margin-bottom: 20px;
+}
+.error {
+	color: #f44336;
+	display: none;
+	margin-left: 10px;
+}
+
+</style>
+<body>
+	<div id="nav-placeholder">
+
+	</div>
+	
+	<script>
+	$(function(){
+	  $("#nav-placeholder").load("nav.html");
+	});
+	</script>
+	<div class="container">
+		<h2>Contact Us</h2>
+		<p>Feel free to get in touch with us if you have any questions or comments about our program.</p>
+		<form id="contact-form">
+			<div>
+				<label for="name">Name</label>
+				<input type="text" id="name" name="name" required>
+				<span class="error" id="name-error"></span>
+			</div>
+			<div>
+				<label for="email">Email</label>
+				<input type="email" id="email" name="email" required>
+				<span class="error" id="email-error"></span>
+			</div>
+			<div>
+				<label for="message">Message</label>
+				<textarea id="message" name="message" rows="5" required></textarea>
+				<span class="error" id="message-error"></span>
+			</div>
+			<input type="submit" value="Send">
+			<div id="alert" class="alert" style="display:none"></div>
+		</form>
+	</div>
+	<script src="script.js"></script>
+	<link rel="stylesheet" href="styles.css">
+
+</body>
+</html>
