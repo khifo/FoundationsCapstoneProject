@@ -74,6 +74,6 @@ app.delete('/registrations/:id', async (req, res) => {
   }
 });
 
-app.listen(port, () => console.log(`Server listening on port ${port}`));
+app.listen(port, () => console.log(`Server listening on port ${5500}`));
 
 
