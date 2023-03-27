@@ -1,56 +1,79 @@
 const express = require("express");
 const cors = require("cors");
+const Registration = require('./models/Registration');
 
 const app = express();
 app.use(cors());
 
 app.use(express.json());
 
-let registrations = [];
+Registration.sync(); // create the table if it doesn't exist
 
-app.post('/registrations', (req, res) => {
-  const registration = req.body;
-  registrations.push(registration);
-  res.status(201).json(registration);
-});
-
-app.get('/registrations', (req, res) => {
-  res.json(registrations);
-});
-
-app.get('/registrations/:id', (req, res) => {
-  const id = req.params.id;
-  const registration = registrations.find(registration => registration.id === id);
-  if (registration) {
-    res.json(registration);
-  } else {
-    res.status(404).json({ error: 'Registration not found' });
+app.post('/registrations', async (req, res) => {
+  try {
+    const registration = await Registration.create(req.body);
+    res.status(201).json(registration);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Could not create registration' });
   }
 });
 
-app.put('/registrations/:id', (req, res) => {
-  const id = req.params.id;
-  const newRegistration = req.body;
-  const index = registrations.findIndex(registration => registration.id === id);
-  if (index !== -1) {
-    registrations[index] = newRegistration;
-    res.json(newRegistration);
-  } else {
-    res.status(404).json({ error: 'Registration not found' });
+app.get('/registrations', async (req, res) => {
+  try {
+    const registrations = await Registration.findAll();
+    res.json(registrations);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Could not fetch registrations' });
   }
 });
 
-app.delete('/registrations/:id', (req, res) => {
-  const id = req.params.id;
-  const index = registrations.findIndex(registration => registration.id === id);
-  if (index !== -1) {
-    registrations.splice(index, 1);
-    res.sendStatus(204);
-  } else {
-    res.status(404).json({ error: 'Registration not found' });
+app.get('/registrations/:id', async (req, res) => {
+  try {
+    const registration = await Registration.findByPk(req.params.id);
+    if (registration) {
+      res.json(registration);
+    } else {
+      res.status(404).json({ error: 'Registration not found' });
+    }
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Could not fetch registration' });
   }
 });
 
-app.listen(port, () => console.log(`Server listening on port ${5500}`));
+app.put('/registrations/:id', async (req, res) => {
+  try {
+    const [numUpdated, updatedRegistrations] = await Registration.update(req.body, {
+      where: { id: req.params.id },
+      returning: true,
+    });
+    if (numUpdated) {
+      res.json(updatedRegistrations[0]);
+    } else {
+      res.status(404).json({ error: 'Registration not found' });
+    }
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Could not update registration' });
+  }
+});
+
+app.delete('/registrations/:id', async (req, res) => {
+  try {
+    const numDeleted = await Registration.destroy({ where: { id: req.params.id } });
+    if (numDeleted) {
+      res.sendStatus(204);
+    } else {
+      res.status(404).json({ error: 'Registration not found' });
+    }
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Could not delete registration' });
+  }
+});
+
+app.listen(port, () => console.log(`Server listening on port ${port}`));
 
 
