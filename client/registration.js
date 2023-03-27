@@ -1,7 +1,7 @@
 const { Sequelize, DataTypes } = require('sequelize');
 const sequelize = new Sequelize('database_name', 'username', 'password', {
   host: 'localhost',
-  dialect: 'mysql', // change to your database dialect
+  dialect: 'mysql',
 });
 
 const Registration = sequelize.define('Registration', {
