@@ -1,12 +1,28 @@
-require('dotenv').config()
-const express = require('express')
-const app = express()
-const cors = require('cors')
-const {5500} = process.env
+const express = require("express");
+const cors = require("cors");
 
-app.use(express.json())
-app.use(cors())
+const app = express();
+app.use(cors());
 
-app.listen(5500, () => console.log(`up on ${5500}`))
+app.use(express.json());
+
+
+app.get("/teams", (req, res) => {
+  const ourteams = ["U10", "U12", "U14"];
+  res.json(ourteams);
+});
+
+app.post("/register", (req, res) => {
+  const { name, email, password } = req.body;
+
+  if (!name || !email || !password) {
+    return res.status(400).json({ error: 'Name, email, and password are required' });
+  }
+
+  const user = { name, email, password };
+  res.status(201).json(user);
+});
+
+app.listen(port, () => console.log(`Server listening on port ${5500}`));
 
 
