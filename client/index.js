@@ -24,6 +24,32 @@ const registrationNameInput = document.querySelector('#registration-name');
 const registrationEmailInput = document.querySelector('#registration-email');
 const registrationPhoneInput = document.querySelector('#registration-phone');
 
+function createRegistration(data) {
+  fetch('/registrations', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data)
+  })
+    .then(response => response.json())
+    .then(newRegistration => {
+      getRegistrations();
+      registrationForm.reset();
+    });
+}
+
+registrationForm.addEventListener('submit', event => {
+  event.preventDefault();
+  const id = registrationIdInput.value;
+  const name = registrationNameInput.value;
+  const email = registrationEmailInput.value;
+  const phone = registrationPhoneInput.value;
+
+  const data = { id, name, email, phone };
+  createRegistration(data);
+});
+
 function getRegistrations() {
   fetch('/registrations')
     .then(response => response.json())
