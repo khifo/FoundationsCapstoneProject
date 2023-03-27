@@ -7,7 +7,7 @@ app.use(cors());
 
 app.use(express.json());
 
-Registration.sync(); // create the table if it doesn't exist
+Registration.sync();
 
 app.post('/registrations', async (req, res) => {
   try {
